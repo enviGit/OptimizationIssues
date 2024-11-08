@@ -24,9 +24,8 @@ Aby uruchomić projekt, wystarczy pobrać repozytorium i otworzyć je w Visual S
 
 ## Jak używać
 
-1. Wprowadź dane wejściowe w odpowiednich polach tekstowych dla każdego z problemów.
+1. Wprowadź poprawne dane wejściowe w odpowiednich polach tekstowych dla każdego z problemów.
 2. Kliknij przycisk "Rozwiąż problem" aby uzyskać wynik.
-3. Możesz również zmienić motyw aplikacji, klikając przycisk do przełączania między motywem ciemnym a jasnym.
 
 ## Licencja
 
