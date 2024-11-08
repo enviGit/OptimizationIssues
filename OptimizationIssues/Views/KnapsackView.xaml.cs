@@ -23,7 +23,8 @@ namespace OptimizationIssues.Views
             viewModel.Values = ValuesTextBox.Text.Split(',').Select(int.Parse).ToList();
 
             int result = viewModel.SolveKnapsack();
-            MessageBox.Show($"Wynik rozwiązania: {result}");
+            //MessageBox.Show($"Wynik rozwiązania: {result}");
+            ResultTextBlock.Text = $"Maksymalna wartość: {result}";
         }
     }
 }

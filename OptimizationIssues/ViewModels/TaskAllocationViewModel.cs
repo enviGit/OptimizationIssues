@@ -1,6 +1,4 @@
-﻿using OptimizationIssues.Models;
-
-namespace OptimizationIssues.ViewModels
+﻿namespace OptimizationIssues.ViewModels
 {
     public class TaskAllocationViewModel
     {
@@ -66,5 +64,4 @@ namespace OptimizationIssues.ViewModels
             return dp[resources, tasks];
         }
     }
-
 }

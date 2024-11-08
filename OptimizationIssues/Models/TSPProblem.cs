@@ -53,5 +53,4 @@
             return GetPermutations(cities, length - 1).SelectMany(t => cities.Where(e => !t.Contains(e)), (t, e) => t.Concat(new int[] { e }).ToArray());
         }
     }
-
 }

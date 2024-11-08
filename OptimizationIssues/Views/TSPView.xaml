@@ -10,31 +10,37 @@
         <local:TSPViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Liczba miast:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
-            <TextBlock.ToolTip>
-                <ToolTip>
-                    <TextBlock>
-                    Wprowadź liczbę miast.<LineBreak/>
-                    Należy podać liczbę całkowitą.
-                    </TextBlock>
-                </ToolTip>
-            </TextBlock.ToolTip>
-    </TextBlock>
-        <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200">
-            <TextBox.ToolTip>
-                <ToolTip>
-                    <TextBlock>
-                    Wprowadź liczbę miast.<LineBreak/>
-                    Należy podać liczbę całkowitą.
-                    </TextBlock>
-                </ToolTip>
-            </TextBox.ToolTip>
-        </TextBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Macierz odległości (oddzielona przecinkami i wierszami):" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0">
-            <TextBlock.ToolTip>
-                <ToolTip>
-                    <TextBlock>
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Text="Liczba miast:" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                    Wprowadź liczbę miast.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                        </TextBlock>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+    </TextBlock>
+            <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                    Wprowadź liczbę miast.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                        </TextBlock>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <TextBlock Text="Macierz odległości:" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
                     Wprowadź macierz odległości między miastami,<LineBreak/>
                     oddzielając wartości przecinkami i wierszami.<LineBreak/>
                     Przykład: <LineBreak/>
@@ -42,14 +48,14 @@
                     10,0,15,25 <LineBreak/>
                     20,15,0,5 <LineBreak/>
                     30,25,5,0
-                    </TextBlock>
-                </ToolTip>
-            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </ToolTip>
+                </TextBlock.ToolTip>
     </TextBlock>
-        <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200" AcceptsReturn="True" Height="100">
-            <TextBox.ToolTip>
-                <ToolTip>
-                    <TextBlock>
+            <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
                     Wprowadź macierz odległości między miastami,<LineBreak/>
                     oddzielając wartości przecinkami i wierszami.<LineBreak/>
                     Przykład: <LineBreak/>
@@ -57,11 +63,16 @@
                     10,0,15,25 <LineBreak/>
                     20,15,0,5 <LineBreak/>
                     30,25,5,0
-                    </TextBlock>
-                </ToolTip>
-            </TextBox.ToolTip>
-        </TextBox>
+                        </TextBlock>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
 
-        <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0" Width="200" Click="SolveButton_Click"/>
+            <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Wyniki:" FontWeight="Bold" FontSize="16" VerticalAlignment="Top"/>
+            <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14"/>
+        </StackPanel>
     </Grid>
 </UserControl>
