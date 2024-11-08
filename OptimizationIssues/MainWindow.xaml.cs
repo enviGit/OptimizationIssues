@@ -12,7 +12,6 @@ namespace OptimizationIssues
         public MainWindow()
         {
             InitializeComponent();
-            SetDarkTheme();
         }
 
         private void ProblemSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -32,28 +31,6 @@ namespace OptimizationIssues
                     ProblemDetails.Content = new TSPView();
                     break;
             }
-        }
-
-        private static void SetDarkTheme()
-        {
-            Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary
-            {
-                Source = new Uri("Styles/DarkTheme.xaml", UriKind.Relative)
-            };
-        }
-
-        private void ChangeThemeButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString().Contains("DarkTheme"))
-                Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary
-                {
-                    Source = new Uri("Styles/LightTheme.xaml", UriKind.Relative)
-                };
-            else
-                Application.Current.Resources.MergedDictionaries[0] = new ResourceDictionary
-                {
-                    Source = new Uri("Styles/DarkTheme.xaml", UriKind.Relative)
-                };
         }
     }
 }

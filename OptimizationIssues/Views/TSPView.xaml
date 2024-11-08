@@ -10,11 +10,57 @@
         <local:TSPViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Liczba miast:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200"/>
+        <TextBlock Text="Liczba miast:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę miast.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę miast.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
-        <TextBlock Text="Macierz odległości (oddzielona przecinkami i wierszami):" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0"/>
-        <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200" AcceptsReturn="True" Height="100"/>
+        <TextBlock Text="Macierz odległości (oddzielona przecinkami i wierszami):" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź macierz odległości między miastami,<LineBreak/>
+                    oddzielając wartości przecinkami i wierszami.<LineBreak/>
+                    Przykład: <LineBreak/>
+                    0,10,20,30 <LineBreak/>
+                    10,0,15,25 <LineBreak/>
+                    20,15,0,5 <LineBreak/>
+                    30,25,5,0
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200" AcceptsReturn="True" Height="100">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź macierz odległości między miastami,<LineBreak/>
+                    oddzielając wartości przecinkami i wierszami.<LineBreak/>
+                    Przykład: <LineBreak/>
+                    0,10,20,30 <LineBreak/>
+                    10,0,15,25 <LineBreak/>
+                    20,15,0,5 <LineBreak/>
+                    30,25,5,0
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
         <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0" Width="200" Click="SolveButton_Click"/>
     </Grid>

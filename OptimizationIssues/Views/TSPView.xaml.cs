@@ -25,7 +25,7 @@ namespace OptimizationIssues.Views
             MessageBox.Show($"Minimalna długość trasy: {result}");
         }
 
-        private List<List<int>> ParseDistanceMatrix(string input)
+        private static List<List<int>> ParseDistanceMatrix(string input)
         {
             var rows = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
             var distanceMatrix = new List<List<int>>();

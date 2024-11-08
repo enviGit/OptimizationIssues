@@ -5,15 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OptimizationIssues"
         mc:Ignorable="d"
-        Title="Optimization Issues" Height="450" Width="800">
-    <Grid>
-        <ComboBox x:Name="ProblemSelector" SelectionChanged="ProblemSelector_SelectionChanged" 
-                  HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="200">
+        Title="Optimization Issues" Height="450" Width="800"
+        Foreground="#FFFFFF">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- Kolory -->
+            <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#2E2E2E"/>
+            <SolidColorBrush x:Key="ButtonHoverBackgroundColor" Color="#007ACC"/>
+            <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#005B99"/>
+            <SolidColorBrush x:Key="TextBoxBackgroundColor" Color="#3A3A3A"/>
+            <SolidColorBrush x:Key="TextBoxBorderColor" Color="#555555"/>
+
+            <!-- Style dla przycisków -->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="{StaticResource ButtonBackgroundColor}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource ButtonHoverBackgroundColor}"/>
+                                    <Setter Property="Opacity" Value="1"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="False">
+                                    <Setter Property="Opacity" Value="0.8"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Style dla TextBoxów -->
+            <Style TargetType="TextBox">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColor}"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorderColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+
+            <!-- Style dla ToolTipów -->
+            <Style TargetType="ToolTip">
+                <Setter Property="Background" Value="#FFFFE0"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Foreground" Value="#333333"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource WindowBackgroundBrush}">
+        <ComboBox x:Name="ProblemSelector" SelectionChanged="ProblemSelector_SelectionChanged" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="200">
             <ComboBoxItem Content="Problem Plecakowy"/>
             <ComboBoxItem Content="Problem Alokacji Zadań"/>
             <ComboBoxItem Content="Problem Komiwojażera"/>
         </ComboBox>
-        <Button Content="Zmień motyw" HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" Margin="10" Click="ChangeThemeButton_Click"/>
         <ContentControl x:Name="ProblemDetails" Margin="10,50,10,10"/>
     </Grid>
 </Window>

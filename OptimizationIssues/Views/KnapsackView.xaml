@@ -10,14 +10,68 @@
         <local:KnapsackViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Pojemność plecaka:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="CapacityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200"/>
+        <TextBlock Text="Pojemność plecaka:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź pojemność plecaka.<LineBreak/>
+                    Należy podać liczbę całkowitą (np. 50).
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="CapacityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź pojemność plecaka.<LineBreak/>
+                    Należy podać liczbę całkowitą (np. 50).
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
-        <TextBlock Text="Wagi przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0"/>
-        <TextBox x:Name="WeightsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200"/>
+        <TextBlock Text="Wagi przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź wagi przedmiotów, oddzielając je przecinkami.<LineBreak/>
+                    Przykład: 10,20,15,5
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="WeightsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź wagi przedmiotów, oddzielając je przecinkami.<LineBreak/>
+                    Przykład: 10,20,15,5
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
-        <TextBlock Text="Wartości przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,10,0"/>
-        <TextBox x:Name="ValuesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,10,0" Width="200"/>
+        <TextBlock Text="Wartości przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,10,0">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź wartości przedmiotów, oddzielając je przecinkami.<LineBreak/>
+                    Przykład: 60,100,120,50
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="ValuesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź wartości przedmiotów, oddzielając je przecinkami.<LineBreak/>
+                    Przykład: 60,100,120,50
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
         <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0" Width="200" Click="SolveButton_Click"/>
     </Grid>

@@ -8,7 +8,7 @@ Aplikacja rozwiązująca klasyczne problemy optymalizacyjne, takie jak problem p
 - **Alokacja zadań** - minimalizacja kosztów alokacji zadań do zasobów, przy zachowaniu ograniczeń.
 - **Problem komiwojażera** - optymalizacja trasy, która pozwala na odwiedzenie wszystkich miast z minimalnym kosztem podróży.
 
-Aplikacja umożliwia użytkownikowi interakcję z problemami poprzez graficzny interfejs, w którym można podać dane wejściowe i uzyskać wyniki w czasie rzeczywistym. W projekcie zaimplementowano możliwość zmiany motywu interfejsu między ciemnym a jasnym, co zwiększa komfort użytkowania.
+Aplikacja umożliwia użytkownikowi interakcję z problemami poprzez graficzny interfejs, w którym można podać dane wejściowe i uzyskać wyniki w czasie rzeczywistym.
 
 ## Technologie
 

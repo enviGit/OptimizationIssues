@@ -10,15 +10,78 @@
         <local:TaskAllocationViewModel />
     </UserControl.DataContext>
     <Grid>
-        <TextBlock Text="Liczba zasobów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="NumberOfResourcesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200"/>
+        <TextBlock Text="Liczba zasobów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę dostępnych zasobów.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="NumberOfResourcesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę dostępnych zasobów.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
-        <TextBlock Text="Liczba zadań:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0"/>
-        <TextBox x:Name="NumberOfTasksTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200"/>
+        <TextBlock Text="Liczba zadań:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="NumberOfTasksTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
+                    Należy podać liczbę całkowitą.
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
-        <TextBlock Text="Macierz kosztów (oddzielona przecinkami i wierszami):" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,10,0"/>
-        <TextBox x:Name="CostMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,10,0" Width="200" AcceptsReturn="True" Height="100"/>
+        <TextBlock Text="Macierz kosztów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,10,0">
+            <TextBlock.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź macierz kosztów przydziału zadań do zasobów.<LineBreak/>
+                    Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
+                    Przykład: <LineBreak/>
+                    10,20,30 <LineBreak/>
+                    20,10,40 <LineBreak/>
+                    30,40,10
+                    </TextBlock>
+                </ToolTip>
+            </TextBlock.ToolTip>
+    </TextBlock>
+        <TextBox x:Name="CostMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,10,0" Width="200" AcceptsReturn="True" Height="100">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <TextBlock>
+                    Wprowadź macierz kosztów przydziału zadań do zasobów.<LineBreak/>
+                    Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
+                    Przykład: <LineBreak/>
+                    10,20,30 <LineBreak/>
+                    20,10,40 <LineBreak/>
+                    30,40,10
+                    </TextBlock>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
 
         <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,290,0,0" Width="200" Click="SolveButton_Click"/>
     </Grid>
+
 </UserControl>
