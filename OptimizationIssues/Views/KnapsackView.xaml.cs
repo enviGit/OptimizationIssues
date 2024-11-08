@@ -88,15 +88,27 @@ namespace OptimizationIssues.Views
                 ValuesTextBox.BorderThickness = new Thickness(1);
             }
 
+            if (weights.Count != values.Count)
+            {
+                isValid = false;
+                WeightsTextBox.BorderBrush = Brushes.Red;
+                WeightsTextBox.BorderThickness = new Thickness(2);
+                ValuesTextBox.BorderBrush = Brushes.Red;
+                ValuesTextBox.BorderThickness = new Thickness(2);
+            }
+
             return isValid;
         }
 
         private bool TryParseList(string input, out List<int> list)
         {
-            list = input.Split(',').Select(str => { return int.TryParse(str.Trim(), out var number) ? number : (int?)null; })
-                        .Where(num => num.HasValue)
-                        .Select(num => num.Value)
-                        .ToList();
+            list = input.Split(',').Select(str =>
+            {
+                return int.TryParse(str.Trim(), out var number) ? number : (int?)null;
+            })
+                .Where(num => num.HasValue)
+                .Select(num => num.Value)
+                .ToList();
 
             return list.Count > 0 && list.Count == input.Split(',').Length;
         }
