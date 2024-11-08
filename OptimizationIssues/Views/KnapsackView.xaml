@@ -26,7 +26,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="CapacityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="CapacityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -47,7 +47,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="WeightsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="WeightsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -68,7 +68,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="ValuesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="ValuesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -79,7 +79,7 @@
                 </TextBox.ToolTip>
             </TextBox>
 
-            <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
+            <Button x:Name="SolveButton" Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click" IsEnabled="False"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10">

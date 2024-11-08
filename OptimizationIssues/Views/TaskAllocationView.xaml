@@ -21,7 +21,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę dostępnych zasobów.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 3).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -31,7 +31,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę dostępnych zasobów.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 3).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
@@ -42,7 +42,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 3).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -52,7 +52,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 3).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
@@ -66,8 +66,8 @@
                     Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
                     Przykład: <LineBreak/>
                     10,20,30 <LineBreak/>
-                    20,10,40 <LineBreak/>
-                    30,40,10
+                    20,15,25 <LineBreak/>
+                    30,25,10
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -80,13 +80,12 @@
                     Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
                     Przykład: <LineBreak/>
                     10,20,30 <LineBreak/>
-                    20,10,40 <LineBreak/>
-                    30,40,10
+                    20,15,25 <LineBreak/>
+3                   0,25,10
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
             </TextBox>
-
 
             <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
         </StackPanel>

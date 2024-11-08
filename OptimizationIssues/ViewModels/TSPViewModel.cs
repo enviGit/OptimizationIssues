@@ -12,7 +12,7 @@ namespace OptimizationIssues.ViewModels
             DistanceMatrix = new List<List<int>>();
         }
 
-        public int SolveTravelingSalesmanProblem()
+        public (int, List<int>) SolveTravelingSalesmanProblem()
         {
             int[,] matrix = new int[NumberOfCities, NumberOfCities];
 

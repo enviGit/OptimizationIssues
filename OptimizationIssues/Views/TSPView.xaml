@@ -21,7 +21,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę miast.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 4).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -31,7 +31,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę miast.<LineBreak/>
-                    Należy podać liczbę całkowitą.
+                    Należy podać liczbę całkowitą (np. 4).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
@@ -44,10 +44,10 @@
                     Wprowadź macierz odległości między miastami,<LineBreak/>
                     oddzielając wartości przecinkami i wierszami.<LineBreak/>
                     Przykład: <LineBreak/>
-                    0,10,20,30 <LineBreak/>
-                    10,0,15,25 <LineBreak/>
-                    20,15,0,5 <LineBreak/>
-                    30,25,5,0
+                    0,10,15,20 <LineBreak/>
+                    10,0,35,25 <LineBreak/>
+                    15,35,0,30 <LineBreak/>
+                    20,25,30,0
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -59,10 +59,10 @@
                     Wprowadź macierz odległości między miastami,<LineBreak/>
                     oddzielając wartości przecinkami i wierszami.<LineBreak/>
                     Przykład: <LineBreak/>
-                    0,10,20,30 <LineBreak/>
-                    10,0,15,25 <LineBreak/>
-                    20,15,0,5 <LineBreak/>
-                    30,25,5,0
+                    0,10,15,20 <LineBreak/>
+                    10,0,35,25 <LineBreak/>
+                    15,35,0,30 <LineBreak/>
+                    20,25,30,0
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>

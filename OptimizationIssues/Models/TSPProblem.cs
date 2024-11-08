@@ -11,15 +11,16 @@
             DistanceMatrix = distanceMatrix;
         }
 
-        public int Solve()
+        public (int, List<int>) Solve()
         {
             var cities = Enumerable.Range(0, NumberOfCities).ToArray();
             return FindShortestPath(cities);
         }
 
-        private int FindShortestPath(int[] cities)
+        private (int, List<int>) FindShortestPath(int[] cities)
         {
             int minPathLength = int.MaxValue;
+            List<int>? bestPath = null;
             var cityPermutations = GetPermutations(cities, cities.Length);
 
             foreach (var permutation in cityPermutations)
@@ -27,10 +28,15 @@
                 int pathLength = CalculatePathLength(permutation);
 
                 if (pathLength < minPathLength)
+                {
                     minPathLength = pathLength;
+                    bestPath = permutation.ToList();
+                }
             }
 
-            return minPathLength;
+            bestPath ??= new List<int>();
+
+            return (minPathLength, bestPath);
         }
 
         private int CalculatePathLength(int[] path)

@@ -23,7 +23,6 @@ namespace OptimizationIssues.Views
             viewModel.CostMatrix = ParseCostMatrix(CostMatrixTextBox.Text);
 
             var (minCost, maxValue) = viewModel.SolveTaskAllocation();
-            //MessageBox.Show($"Minimalny koszt alokacji: {minCost}\nMaksymalna wartość alokacji: {maxValue}");
             ResultTextBlock.Text = $"Minimalny koszt: {minCost}\nMaksymalna wartość: {maxValue}";
         }
 

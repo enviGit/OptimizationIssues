@@ -21,9 +21,10 @@ namespace OptimizationIssues.Views
             viewModel.NumberOfCities = int.Parse(NumberOfCitiesTextBox.Text);
             viewModel.DistanceMatrix = ParseDistanceMatrix(DistanceMatrixTextBox.Text);
 
-            int result = viewModel.SolveTravelingSalesmanProblem();
-            //MessageBox.Show($"Minimalna długość trasy: {result}");
-            ResultTextBlock.Text = $"Minimalna długość trasy: {result}";
+            (int result, List<int> path) = viewModel.SolveTravelingSalesmanProblem();
+            path.Add(path[0]);
+            string pathString = string.Join(" -> ", path);
+            ResultTextBlock.Text = $"Minimalna długość trasy: {result}\nTrasa: {pathString}";
         }
 
         private static List<List<int>> ParseDistanceMatrix(string input)
