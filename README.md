@@ -18,10 +18,6 @@ Aplikacja umożliwia użytkownikowi interakcję z problemami poprzez graficzny i
 - Algorytmy optymalizacyjne
 - XAML
 
-## Instalacja
-
-Aby uruchomić projekt, wystarczy pobrać repozytorium i otworzyć je w Visual Studio. Następnie można skompilować i uruchomić aplikację.
-
 ## Jak używać
 
 1. **Pobierz najnowszą wersję**:
