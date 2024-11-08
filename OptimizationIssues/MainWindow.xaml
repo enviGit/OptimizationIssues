@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OptimizationIssues"
         mc:Ignorable="d"
         Title="Optimization Issues" Height="450" Width="800"
-        Foreground="#FFFFFF">
+        Foreground="#FFFFFF" Icon="/Icon.png">
 
     <Window.Resources>
         <ResourceDictionary>
