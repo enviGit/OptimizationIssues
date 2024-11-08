@@ -26,7 +26,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="NumberOfCitiesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -52,7 +52,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100">
+            <TextBox x:Name="DistanceMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -68,7 +68,7 @@
                 </TextBox.ToolTip>
             </TextBox>
 
-            <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
+            <Button x:Name="SolveButton" Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="10">
             <TextBlock Text="Wyniki:" FontWeight="Bold" FontSize="16" VerticalAlignment="Top"/>
