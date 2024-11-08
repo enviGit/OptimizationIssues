@@ -24,8 +24,16 @@ Aby uruchomić projekt, wystarczy pobrać repozytorium i otworzyć je w Visual S
 
 ## Jak używać
 
-1. Wprowadź poprawne dane wejściowe w odpowiednich polach tekstowych dla każdego z problemów.
-2. Kliknij przycisk "Rozwiąż problem" aby uzyskać wynik.
+1. **Pobierz najnowszą wersję**:
+   - Możesz pobrać najnowszą wersję aplikacji z sekcji [Releases](https://github.com/enviGit/OptimizationIssues/releases/latest) na GitHubie.
+2. **Wprowadź dane wejściowe**:
+   - Wprowadź poprawne dane wejściowe w odpowiednich polach tekstowych dla każdego z rozwiązywanych problemów (np. problem plecakowy, przydział zadań, problem komiwojażera).
+3. **Rozwiąż problem**:
+   - Kliknij przycisk **„Rozwiąż problem”**, aby uruchomić algorytm i uzyskać wynik.
+4. **Wynik**:
+   - Po kliknięciu przycisku, aplikacja wyświetli wynik optymalizacji dla wybranego problemu.
+
+Pamiętaj, aby przed użyciem aplikacji upewnić się, że dane wejściowe są poprawne, aby uzyskać poprawne wyniki.
 
 ## Licencja
 
