@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Remove="Styles\DarkTheme.xaml" />
+    <Page Remove="Styles\LightTheme.xaml" />
+    <Page Remove="Styles\Styles.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Styles\DarkTheme.xaml" />
+    <Resource Include="Styles\LightTheme.xaml" />
+    <Resource Include="Styles\Styles.xaml" />
+  </ItemGroup>
+
+</Project>

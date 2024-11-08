@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="OptimizationIssues.Views.KnapsackView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:OptimizationIssues.ViewModels"
+             x:Name="KnapsackViewControl">
+    <UserControl.DataContext>
+        <local:KnapsackViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <TextBlock Text="Pojemność plecaka:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10"/>
+        <TextBox x:Name="CapacityTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,30,10,0" Width="200"/>
+
+        <TextBlock Text="Wagi przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,70,10,0"/>
+        <TextBox x:Name="WeightsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,100,10,0" Width="200"/>
+
+        <TextBlock Text="Wartości przedmiotów:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,140,10,0"/>
+        <TextBox x:Name="ValuesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,170,10,0" Width="200"/>
+
+        <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,210,0,0" Width="200" Click="SolveButton_Click"/>
+    </Grid>
+</UserControl>
