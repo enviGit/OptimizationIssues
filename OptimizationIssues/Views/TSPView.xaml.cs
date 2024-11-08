@@ -1,4 +1,5 @@
-﻿using OptimizationIssues.ViewModels;
+﻿#pragma warning disable CS8629
+using OptimizationIssues.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
