@@ -26,7 +26,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="NumberOfResourcesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="NumberOfResourcesTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -47,7 +47,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="NumberOfTasksTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+            <TextBox x:Name="NumberOfTasksTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -72,7 +72,7 @@
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="CostMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100">
+            <TextBox x:Name="CostMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -87,7 +87,7 @@
                 </TextBox.ToolTip>
             </TextBox>
 
-            <Button Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click"/>
+            <Button x:Name="SolveButton" Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click" IsEnabled="False"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10">

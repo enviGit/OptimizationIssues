@@ -33,6 +33,8 @@ namespace OptimizationIssues.Views
                     int result = viewModel.SolveKnapsack();
                     ResultTextBlock.Text = $"Maksymalna wartość: {result}";
                 }
+                else
+                    ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
             }
             catch (Exception ex)
             {
