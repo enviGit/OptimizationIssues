@@ -13,6 +13,12 @@ namespace OptimizationIssues.Views
     /// </summary>
     public partial class KnapsackView : UserControl
     {
+        public class KnapsackItem
+        {
+            public int Index { get; set; }
+            public int Weight { get; set; }
+            public int Value { get; set; }
+        }
         public KnapsackView()
         {
             InitializeComponent();
@@ -42,7 +48,7 @@ namespace OptimizationIssues.Views
 
                     ResultTextBlock.Inlines.Add(new Run(maxValue.ToString())
                     {
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
                     });
 
                     ResultTextBlock.Inlines.Add(new Run("\nZużyta pojemność plecaka: ")
@@ -61,24 +67,32 @@ namespace OptimizationIssues.Views
 
                     ResultTextBlock.Inlines.Add(new Run("\n\nWybrane przedmioty:\n")
                     {
-                        Foreground = new SolidColorBrush(Colors.White)
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontWeight = FontWeights.Bold
                     });
 
-                    var sortedItems = selectedItems
-                        .Select((value, index) => new { value, originalIndex = index + 1 })
-                        .OrderBy(item => weights.IndexOf(item.value.Weight))
-                        .ToList();
+                    selectedItems.Reverse();
 
-                    foreach (var item in sortedItems)
-                    {
-                        int itemNumber = weights.IndexOf(item.value.Weight) + 1;
+                    foreach(var item in selectedItems)
+{
+                        int itemNumber = item.Index + 1;
 
-                        ResultTextBlock.Inlines.Add(new Run($"Przedmiot {itemNumber} - Waga: ")
+                        ResultTextBlock.Inlines.Add(new Run($"Przedmiot ")
                         {
                             Foreground = new SolidColorBrush(Colors.White)
                         });
 
-                        ResultTextBlock.Inlines.Add(new Run(item.value.Weight.ToString())
+                        ResultTextBlock.Inlines.Add(new Run($"{itemNumber}")
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run($" - Waga: ")
+                        {
+                            Foreground = new SolidColorBrush(Colors.White)
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run(item.Weight.ToString())
                         {
                             Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E6A8D7"))
                         });
@@ -88,7 +102,7 @@ namespace OptimizationIssues.Views
                             Foreground = new SolidColorBrush(Colors.White)
                         });
 
-                        ResultTextBlock.Inlines.Add(new Run(item.value.Value.ToString())
+                        ResultTextBlock.Inlines.Add(new Run(item.Value.ToString())
                         {
                             Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ADD8E6"))
                         });

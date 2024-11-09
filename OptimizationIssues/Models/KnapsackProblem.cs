@@ -3,14 +3,16 @@
     public class KnapsackProblem : ProblemBase
     {
         public int KnapsackCapacity { get; set; }
+        public List<int> Indexes { get; set; }
         public List<int> Weights { get; set; }
         public List<int> Values { get; set; }
 
-        public KnapsackProblem(int capacity, List<int> weights, List<int> values)
+        public KnapsackProblem(int capacity, List<int> indexes, List<int> weights, List<int> values)
         {
             KnapsackCapacity = capacity;
             Weights = weights;
             Values = values;
+            Indexes = Enumerable.Range(0, weights.Count).ToList();
         }
 
         public override int Solve()
@@ -18,7 +20,7 @@
             return 0;
         }
 
-        public (int MaxValue, List<(int Weight, int Value)> SelectedItems, int UsedCapacity) SolveWithDetails()
+        public (int MaxValue, List<(int Index, int Weight, int Value)> SelectedItems, int UsedCapacity) SolveWithDetails()
         {
             int n = Weights.Count;
             int[,] dp = new int[n + 1, KnapsackCapacity + 1];
@@ -37,7 +39,7 @@
             }
 
             int maxValue = dp[n, KnapsackCapacity];
-            List<(int Weight, int Value)> selectedItems = new List<(int, int)>();
+            List<(int Index, int Weight, int Value)> selectedItems = new List<(int, int, int)>();
             int remainingCapacity = KnapsackCapacity;
             int usedCapacity = 0;
 
@@ -45,7 +47,7 @@
             {
                 if (dp[i, remainingCapacity] != dp[i - 1, remainingCapacity])
                 {
-                    selectedItems.Add((Weights[i - 1], Values[i - 1]));
+                    selectedItems.Add((Indexes[i - 1], Weights[i - 1], Values[i - 1]));
                     remainingCapacity -= Weights[i - 1];
                     usedCapacity += Weights[i - 1];
                 }
