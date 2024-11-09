@@ -47,6 +47,11 @@ namespace OptimizationIssues.Views
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
                     });
 
+                    ResultTextBlock.Inlines.Add(new Run("Trasa: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
                     var pathParts = pathString.Split(new string[] { " -> " }, StringSplitOptions.None);
 
                     for (int i = 0; i < pathParts.Length; i++)
