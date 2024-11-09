@@ -64,14 +64,21 @@ namespace OptimizationIssues.Views
                         Foreground = new SolidColorBrush(Colors.White)
                     });
 
-                    foreach (var item in selectedItems)
+                    var sortedItems = selectedItems
+                        .Select((value, index) => new { value, originalIndex = index + 1 })
+                        .OrderBy(item => weights.IndexOf(item.value.Weight))
+                        .ToList();
+
+                    foreach (var item in sortedItems)
                     {
-                        ResultTextBlock.Inlines.Add(new Run("Waga: ")
+                        int itemNumber = weights.IndexOf(item.value.Weight) + 1;
+
+                        ResultTextBlock.Inlines.Add(new Run($"Przedmiot {itemNumber} - Waga: ")
                         {
                             Foreground = new SolidColorBrush(Colors.White)
                         });
 
-                        ResultTextBlock.Inlines.Add(new Run(item.Weight.ToString())
+                        ResultTextBlock.Inlines.Add(new Run(item.value.Weight.ToString())
                         {
                             Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E6A8D7"))
                         });
@@ -81,7 +88,7 @@ namespace OptimizationIssues.Views
                             Foreground = new SolidColorBrush(Colors.White)
                         });
 
-                        ResultTextBlock.Inlines.Add(new Run(item.Value.ToString())
+                        ResultTextBlock.Inlines.Add(new Run(item.value.Value.ToString())
                         {
                             Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ADD8E6"))
                         });
@@ -173,6 +180,37 @@ namespace OptimizationIssues.Views
 
         private void InputsChanged(object sender, TextChangedEventArgs e)
         {
+            SolveButton.IsEnabled = ValidateInputs(out _, out _, out _);
+        }
+        private void GenerateSampleDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+
+            int capacity = random.Next(10, 101);
+            CapacityTextBox.Text = capacity.ToString();
+
+            int itemCount = random.Next(3, 8);
+            List<int> weights = new List<int>();
+            List<int> values = new List<int>();
+
+            for (int i = 0; i < itemCount; i++)
+            {
+                weights.Add(random.Next(1, capacity / 2));
+                values.Add(random.Next(10, 101));
+            }
+
+            WeightsTextBox.Text = string.Join(", ", weights);
+            ValuesTextBox.Text = string.Join(", ", values);
+
+            CapacityTextBox.BorderBrush = Brushes.Black;
+            CapacityTextBox.BorderThickness = new Thickness(1);
+
+            WeightsTextBox.BorderBrush = Brushes.Black;
+            WeightsTextBox.BorderThickness = new Thickness(1);
+
+            ValuesTextBox.BorderBrush = Brushes.Black;
+            ValuesTextBox.BorderThickness = new Thickness(1);
+
             SolveButton.IsEnabled = ValidateInputs(out _, out _, out _);
         }
     }

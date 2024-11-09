@@ -83,6 +83,7 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="10">
+            <Button Content="Generuj przykładowe dane" VerticalAlignment="Top" Width="200" Click="GenerateSampleDataButton_Click"/>
             <TextBlock Text="Wyniki:" FontWeight="Bold" FontSize="16" VerticalAlignment="Top"/>
             <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14"/>
         </StackPanel>
