@@ -14,10 +14,10 @@ namespace OptimizationIssues.ViewModels
             Values = new List<int>();
         }
 
-        public int SolveKnapsack()
+        public (int MaxValue, List<(int Weight, int Value)> SelectedItems, int UsedCapacity) SolveKnapsackWithDetails()
         {
             KnapsackProblem problem = new KnapsackProblem(KnapsackCapacity, Weights, Values);
-            return problem.Solve();
+            return problem.SolveWithDetails();
         }
     }
 }

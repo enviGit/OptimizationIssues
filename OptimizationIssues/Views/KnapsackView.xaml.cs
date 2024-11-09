@@ -3,6 +3,7 @@ using OptimizationIssues.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OptimizationIssues.Views
@@ -31,8 +32,67 @@ namespace OptimizationIssues.Views
                     viewModel.Weights = weights;
                     viewModel.Values = values;
 
-                    int result = viewModel.SolveKnapsack();
-                    ResultTextBlock.Text = $"Maksymalna wartość: {result}";
+                    var (maxValue, selectedItems, usedCapacity) = viewModel.SolveKnapsackWithDetails();
+                    ResultTextBlock.Inlines.Clear();
+
+                    ResultTextBlock.Inlines.Add(new Run("Maksymalna wartość: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run(maxValue.ToString())
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run("\n\nWybrane przedmioty:\n")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    foreach (var item in selectedItems)
+                    {
+                        ResultTextBlock.Inlines.Add(new Run("Waga: ")
+                        {
+                            Foreground = new SolidColorBrush(Colors.White)
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run(item.Weight.ToString())
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E6A8D7"))
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run(", Wartość: ")
+                        {
+                            Foreground = new SolidColorBrush(Colors.White)
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run(item.Value.ToString())
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ADD8E6"))
+                        });
+
+                        ResultTextBlock.Inlines.Add(new Run("\n")
+                        {
+                            Foreground = new SolidColorBrush(Colors.White)
+                        });
+                    }
+
+                    ResultTextBlock.Inlines.Add(new Run("\nZużyta pojemność plecaka: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    if (usedCapacity == capacity)
+                        ResultTextBlock.Inlines.Add(new Run($"{usedCapacity}/{capacity}")
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
+                        });
+                    else
+                        ResultTextBlock.Inlines.Add(new Run($"{usedCapacity}/{capacity}")
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9898"))
+                        });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";

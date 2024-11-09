@@ -15,6 +15,11 @@
 
         public override int Solve()
         {
+            return 0;
+        }
+
+        public (int MaxValue, List<(int Weight, int Value)> SelectedItems, int UsedCapacity) SolveWithDetails()
+        {
             int n = Weights.Count;
             int[,] dp = new int[n + 1, KnapsackCapacity + 1];
 
@@ -31,7 +36,22 @@
                 }
             }
 
-            return dp[n, KnapsackCapacity];
+            int maxValue = dp[n, KnapsackCapacity];
+            List<(int Weight, int Value)> selectedItems = new List<(int, int)>();
+            int remainingCapacity = KnapsackCapacity;
+            int usedCapacity = 0;
+
+            for (int i = n; i > 0 && remainingCapacity > 0; i--)
+            {
+                if (dp[i, remainingCapacity] != dp[i - 1, remainingCapacity])
+                {
+                    selectedItems.Add((Weights[i - 1], Values[i - 1]));
+                    remainingCapacity -= Weights[i - 1];
+                    usedCapacity += Weights[i - 1];
+                }
+            }
+
+            return (maxValue, selectedItems, usedCapacity);
         }
     }
 }
