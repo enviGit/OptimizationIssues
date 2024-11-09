@@ -156,5 +156,32 @@ namespace OptimizationIssues.Views
         {
             SolveButton.IsEnabled = ValidateInputs(out _, out _, out _);
         }
+        private void GenerateSampleDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            Random random = new Random();
+
+            int numberOfResources = random.Next(2, 6);
+            int numberOfTasks = random.Next(2, 6);
+
+            var costMatrix = new List<List<int>>();
+
+            for (int i = 0; i < numberOfResources; i++)
+            {
+                var row = new List<int>();
+
+                for (int j = 0; j < numberOfTasks; j++)
+                    row.Add(random.Next(10, 100));
+
+                costMatrix.Add(row);
+            }
+
+            NumberOfResourcesTextBox.Text = numberOfResources.ToString();
+            NumberOfTasksTextBox.Text = numberOfTasks.ToString();
+
+            var costMatrixText = string.Join(Environment.NewLine, costMatrix.Select(row => string.Join(",", row)));
+            CostMatrixTextBox.Text = costMatrixText;
+
+            SolveButton.IsEnabled = true;
+        }
     }
 }
