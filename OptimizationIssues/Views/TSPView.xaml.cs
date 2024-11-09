@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8629
 using OptimizationIssues.ViewModels;
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -148,6 +149,47 @@ namespace OptimizationIssues.Views
         private void InputsChanged(object sender, TextChangedEventArgs e)
         {
             SolveButton.IsEnabled = ValidateInputs(out _, out _);
+        }
+
+        private void GenerateSampleDataButton_Click(object sender, RoutedEventArgs e)
+        {
+            Random rand = new Random();
+
+            int numberOfCities = rand.Next(3, 11);
+            NumberOfCitiesTextBox.Text = numberOfCities.ToString();
+
+            var distanceMatrix = GenerateRandomDistanceMatrix(numberOfCities);
+            DistanceMatrixTextBox.Text = FormatDistanceMatrix(distanceMatrix);
+
+            SolveButton.IsEnabled = true;
+        }
+
+        private List<List<int>> GenerateRandomDistanceMatrix(int size)
+        {
+            Random rand = new Random();
+            var matrix = new List<List<int>>();
+
+            for (int i = 0; i < size; i++)
+            {
+                var row = new List<int>();
+
+                for (int j = 0; j < size; j++)
+                    row.Add(i == j ? 0 : rand.Next(10, 101));
+
+                matrix.Add(row);
+            }
+
+            return matrix;
+        }
+
+        private string FormatDistanceMatrix(List<List<int>> matrix)
+        {
+            var result = new StringBuilder();
+
+            foreach (var row in matrix)
+                result.AppendLine(string.Join(",", row));
+
+            return result.ToString();
         }
     }
 }
