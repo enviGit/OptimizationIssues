@@ -45,6 +45,20 @@ namespace OptimizationIssues.Views
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
                     });
 
+                    ResultTextBlock.Inlines.Add(new Run("\nZużyta pojemność plecaka: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    double fillPercentage = ((double)usedCapacity / capacity) * 100;
+
+                    ResultTextBlock.Inlines.Add(new Run($"{usedCapacity}/{capacity} ({fillPercentage:F2}%)")
+                    {
+                        Foreground = new SolidColorBrush(usedCapacity == capacity
+                        ? (Color)ColorConverter.ConvertFromString("#98FF98")
+                        : (Color)ColorConverter.ConvertFromString("#FF9898"))
+                    });
+
                     ResultTextBlock.Inlines.Add(new Run("\n\nWybrane przedmioty:\n")
                     {
                         Foreground = new SolidColorBrush(Colors.White)
@@ -77,22 +91,6 @@ namespace OptimizationIssues.Views
                             Foreground = new SolidColorBrush(Colors.White)
                         });
                     }
-
-                    ResultTextBlock.Inlines.Add(new Run("\nZużyta pojemność plecaka: ")
-                    {
-                        Foreground = new SolidColorBrush(Colors.White)
-                    });
-
-                    if (usedCapacity == capacity)
-                        ResultTextBlock.Inlines.Add(new Run($"{usedCapacity}/{capacity}")
-                        {
-                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
-                        });
-                    else
-                        ResultTextBlock.Inlines.Add(new Run($"{usedCapacity}/{capacity}")
-                        {
-                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9898"))
-                        });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";

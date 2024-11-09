@@ -3,6 +3,7 @@ using OptimizationIssues.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OptimizationIssues.Views
@@ -32,7 +33,27 @@ namespace OptimizationIssues.Views
                     viewModel.CostMatrix = costMatrix;
 
                     var (minCost, maxValue) = viewModel.SolveTaskAllocation();
-                    ResultTextBlock.Text = $"Minimalny koszt: {minCost}\nMaksymalna wartość: {maxValue}";
+                    ResultTextBlock.Inlines.Clear();
+
+                    ResultTextBlock.Inlines.Add(new Run("Minimalny koszt: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run(minCost.ToString())
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run("\nMaksymalna wartość: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run(maxValue.ToString())
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9898"))
+                    });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";

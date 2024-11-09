@@ -3,6 +3,7 @@ using OptimizationIssues.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace OptimizationIssues.Views
@@ -33,7 +34,27 @@ namespace OptimizationIssues.Views
                     (int result, List<int> path) = viewModel.SolveTravelingSalesmanProblem();
                     path.Add(path[0]);
                     string pathString = string.Join(" -> ", path);
-                    ResultTextBlock.Text = $"Minimalna długość trasy: {result}\nTrasa: {pathString}";
+                    ResultTextBlock.Inlines.Clear();
+
+                    ResultTextBlock.Inlines.Add(new Run("Minimalna długość trasy: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run(result.ToString())
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run("\nTrasa: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run(pathString)
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                    });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
