@@ -5,7 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:local="clr-namespace:OptimizationIssues.ViewModels"
-             x:Name="TSPViewControl">
+             x:Name="TSPViewControl"
+             Background="#2E2E2E"
+             Foreground="#FFFFFF">
+    
     <UserControl.DataContext>
         <local:TSPViewModel />
     </UserControl.DataContext>

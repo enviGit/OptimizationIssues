@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:local="clr-namespace:OptimizationIssues.ViewModels"
-             x:Name="TaskAllocationViewControl">
+             x:Name="TaskAllocationViewControl"
+             Background="#2E2E2E"
+             Foreground="#FFFFFF">
     <UserControl.DataContext>
         <local:TaskAllocationViewModel />
     </UserControl.DataContext>

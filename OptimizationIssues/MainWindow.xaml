@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OptimizationIssues"
+		xmlns:views="clr-namespace:OptimizationIssues.Views"
         mc:Ignorable="d"
         Title="Optimization Issues" Height="450" Width="800"
-        Foreground="#FFFFFF" Icon="/Icon.png">
+        Icon="/Icon.png" ResizeMode="NoResize">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -17,6 +18,38 @@
             <SolidColorBrush x:Key="TextBoxBackgroundColor" Color="#3A3A3A"/>
             <SolidColorBrush x:Key="TextBoxBorderColor" Color="#555555"/>
             <SolidColorBrush x:Key="TextBoxFontColor" Color="#FFFFFF"/>
+			<SolidColorBrush x:Key="TabItemSelectedBackground" Color="#000000"/>
+            <SolidColorBrush x:Key="TabItemUnselectedBackground" Color="#3A3A3A"/>
+            <SolidColorBrush x:Key="TabItemSelectedForeground" Color="#000000"/>
+            <SolidColorBrush x:Key="TabItemUnselectedForeground" Color="#FFFFFF"/>
+
+            <!-- Style dla TabControl -->
+            <Style TargetType="TabControl">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="{StaticResource TabItemUnselectedBackground}"/>
+                <Setter Property="BorderThickness" Value="3"/>
+            </Style>
+
+            <!-- Style dla TabItem -->
+            <Style TargetType="TabItem">
+                <Setter Property="Background" Value="{StaticResource TabItemUnselectedBackground}"/>
+                <Setter Property="Foreground" Value="{StaticResource TabItemUnselectedForeground}"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="Gulim"/>
+                <Setter Property="Height" Value="25"/>
+
+                <!-- Styl na wybrany TabItem -->
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="{StaticResource TabItemSelectedBackground}"/>
+                        <Setter Property="Foreground" Value="{StaticResource TabItemSelectedForeground}"/>
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#4C4C4C"/>
+                        <Setter Property="Foreground" Value="{StaticResource TabItemSelectedForeground}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
 
             <!-- Style dla przycisków -->
             <Style TargetType="Button">
@@ -75,11 +108,16 @@
     </Window.Resources>
 
     <Grid Background="{StaticResource WindowBackgroundBrush}">
-        <ComboBox x:Name="ProblemSelector" SelectionChanged="ProblemSelector_SelectionChanged" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="200">
-            <ComboBoxItem Content="Problem Plecakowy"/>
-            <ComboBoxItem Content="Problem Alokacji Zadań"/>
-            <ComboBoxItem Content="Problem Komiwojażera"/>
-        </ComboBox>
-        <ContentControl x:Name="ProblemDetails" Margin="10,50,10,10"/>
+        <TabControl x:Name="ProblemTabs">
+            <TabItem Header="Problem Plecakowy">
+                <views:KnapsackView />
+            </TabItem>
+            <TabItem Header="Problem Alokacji Zadań">
+                <views:TaskAllocationView />
+            </TabItem>
+            <TabItem Header="Problem Komiwojażera">
+                <views:TSPView />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

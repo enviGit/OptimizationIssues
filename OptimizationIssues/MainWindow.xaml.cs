@@ -13,24 +13,5 @@ namespace OptimizationIssues
         {
             InitializeComponent();
         }
-
-        private void ProblemSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string selectedProblem = ((ComboBoxItem)ProblemSelector.SelectedItem)?.Content?.ToString() ?? string.Empty;
-            ProblemDetails.Content = null;
-
-            switch (selectedProblem)
-            {
-                case "Problem Plecakowy":
-                    ProblemDetails.Content = new KnapsackView();
-                    break;
-                case "Problem Alokacji Zadań":
-                    ProblemDetails.Content = new TaskAllocationView();
-                    break;
-                case "Problem Komiwojażera":
-                    ProblemDetails.Content = new TSPView();
-                    break;
-            }
-        }
     }
 }
