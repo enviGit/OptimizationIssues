@@ -81,13 +81,31 @@
                 </TextBox.ToolTip>
             </TextBox>
 
-            <Button x:Name="SolveButton" Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click" IsEnabled="False"/>
+            <Button x:Name="SolveButton" Content="Rozwiąż problem" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="SolveButton_Click" IsEnabled="False">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                             Kliknij aby rozwiązać problem.
+                        </TextBlock>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="10">
-            <Button Content="Generuj przykładowe dane" VerticalAlignment="Top" Width="200" Click="GenerateSampleDataButton_Click"/>
+        <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="-15,0,0,10">
+                <Button Content="Generuj przykładowe dane" Width="200" Click="GenerateSampleDataButton_Click" HorizontalAlignment="Left">
+                    <Button.ToolTip>
+                        <ToolTip>
+                            <TextBlock>
+                                Kliknij aby program wypełnił za Ciebie pola przykładowymi, losowo wygenerowanymi danymi.
+                            </TextBlock>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+            </StackPanel>
             <TextBlock Text="Wyniki:" FontWeight="Bold" FontSize="16" VerticalAlignment="Top"/>
-            <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14"/>
+            <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14" Margin="0,5,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

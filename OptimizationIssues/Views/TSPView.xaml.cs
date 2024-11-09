@@ -42,20 +42,26 @@ namespace OptimizationIssues.Views
                         Foreground = new SolidColorBrush(Colors.White)
                     });
 
-                    ResultTextBlock.Inlines.Add(new Run(result.ToString())
+                    ResultTextBlock.Inlines.Add(new Run(result.ToString() + "\n")
                     {
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
                     });
 
-                    ResultTextBlock.Inlines.Add(new Run("\nTrasa: ")
-                    {
-                        Foreground = new SolidColorBrush(Colors.White)
-                    });
+                    var pathParts = pathString.Split(new string[] { " -> " }, StringSplitOptions.None);
 
-                    ResultTextBlock.Inlines.Add(new Run(pathString)
+                    for (int i = 0; i < pathParts.Length; i++)
                     {
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
-                    });
+                        if (i > 0)
+                            ResultTextBlock.Inlines.Add(new Run(" -> ")
+                            {
+                                Foreground = new SolidColorBrush(Colors.White)
+                            });
+
+                        ResultTextBlock.Inlines.Add(new Run(pathParts[i])
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                        });
+                    }
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
