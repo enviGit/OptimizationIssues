@@ -5,6 +5,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using OxyPlot;
+using OxyPlot.Series;
+using OxyPlot.Axes;
+using OxyPlot.Annotations;
+using static OptimizationIssues.Views.KnapsackView;
 
 namespace OptimizationIssues.Views
 {
@@ -24,6 +29,15 @@ namespace OptimizationIssues.Views
             InitializeComponent();
             DataContext = new KnapsackViewModel();
             ValidateInputs(out _, out _, out _);
+
+            var plotModel = new PlotModel
+            {
+                Title = "Wyniki optymalizacji",
+                Background = OxyColor.FromRgb(46, 46, 46)
+            };
+
+            plotModel.TextColor = OxyColor.FromRgb(255, 255, 255);
+            KnapsackPlotView.Model = plotModel;
         }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
@@ -68,7 +82,7 @@ namespace OptimizationIssues.Views
                     ResultTextBlock.Inlines.Add(new Run("\n\nWybrane przedmioty:\n")
                     {
                         Foreground = new SolidColorBrush(Colors.White),
-                        FontWeight = FontWeights.Bold
+                        FontWeight = System.Windows.FontWeights.Bold
                     });
 
                     selectedItems.Reverse();
@@ -112,6 +126,15 @@ namespace OptimizationIssues.Views
                             Foreground = new SolidColorBrush(Colors.White)
                         });
                     }
+
+                    var knapsackItems = selectedItems.Select(item => new KnapsackItem
+                    {
+                        Index = item.Index,
+                        Weight = item.Weight,
+                        Value = item.Value
+                    }).ToList();
+
+                    UpdateChart(knapsackItems);
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
@@ -226,6 +249,99 @@ namespace OptimizationIssues.Views
             ValuesTextBox.BorderThickness = new Thickness(1);
 
             SolveButton.IsEnabled = ValidateInputs(out _, out _, out _);
+        }
+
+        private void UpdateChart(List<KnapsackItem> selectedItems)
+        {
+            var plotModel = new PlotModel 
+            { 
+                Title = "Wyniki optymalizacji",
+                Background = OxyColor.FromRgb(46, 46, 46)
+            };
+
+            plotModel.TextColor = OxyColor.FromRgb(255, 255, 255);
+
+            var valueSeries = new LineSeries
+            {
+                Title = "Wartości przedmiotów",
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 5,
+                StrokeThickness = 2,
+                Color = OxyColor.FromRgb(0, 255, 0)
+            };
+
+            var weightSeries = new LineSeries
+            {
+                Title = "Wagi przedmiotów",
+                MarkerType = MarkerType.Circle,
+                MarkerSize = 5,
+                StrokeThickness = 2,
+                Color = OxyColor.FromRgb(255, 0, 0)
+            };
+
+            for (int i = 0; i < selectedItems.Count; i++)
+            {
+                var item = selectedItems[i];
+                valueSeries.Points.Add(new DataPoint(i, item.Value));
+                weightSeries.Points.Add(new DataPoint(i, item.Weight));
+            }
+
+            plotModel.Series.Add(valueSeries);
+            plotModel.Series.Add(weightSeries);
+
+            foreach (var item in selectedItems)
+            {
+                var priorityColor = OxyColor.FromRgb(
+                    (byte)(255 - item.Value * 2),
+                    (byte)(255 - item.Weight * 2),
+                    0
+                );
+
+                var annotation = new TextAnnotation
+                {
+                    Text = $"{item.Value}",
+                    TextPosition = new DataPoint(selectedItems.IndexOf(item), item.Value),
+                    FontSize = 12,
+                    TextColor = OxyColor.FromRgb(255, 255, 255)
+                };
+
+                plotModel.Annotations.Add(annotation);
+            }
+
+            plotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                Minimum = 0,
+                Maximum = selectedItems.Max(item => item.Value) + 10,
+                Title = "Wartość przedmiotu",
+                TitleColor = OxyColor.FromRgb(255, 255, 255),
+                TextColor = OxyColor.FromRgb(255, 255, 255)
+            });
+
+            plotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Right,
+                Minimum = 0,
+                Maximum = selectedItems.Max(item => item.Weight) + 10,
+                Title = "Waga przedmiotu",
+                TitleColor = OxyColor.FromRgb(255, 255, 255),
+                TextColor = OxyColor.FromRgb(255, 255, 255)
+            });
+
+            plotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Bottom,
+                Minimum = 0,
+                Maximum = selectedItems.Count,
+                MajorStep = 1,
+                MinorStep = 1,
+                Title = "Numer przedmiotu",
+                LabelFormatter = value => (value + 1).ToString(),
+                TitleColor = OxyColor.FromRgb(255, 255, 255),
+                TextColor = OxyColor.FromRgb(255, 255, 255)
+            });
+
+            KnapsackPlotView.Model = plotModel;
         }
     }
 }

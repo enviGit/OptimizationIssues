@@ -1,6 +1,4 @@
-﻿using OptimizationIssues.Views;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace OptimizationIssues
 {
