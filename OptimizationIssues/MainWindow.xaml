@@ -74,12 +74,43 @@
         <TabControl x:Name="ProblemTabs">
             <TabItem Header="Problem Plecakowy">
                 <views:KnapsackView />
+
+                <TabItem.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Problem plecakowy polega na znalezieniu optymalnego zestawu przedmiotów,<LineBreak/>
+                            które można spakować do plecaka o ograniczonej pojemności, <LineBreak/>
+                            aby maksymalizować łączną wartość.<LineBreak/>
+                            Użytkownik musi wprowadzić pojemność plecaka oraz listę wag i wartości przedmiotów.
+                        </TextBlock>
+                    </ToolTip>
+                </TabItem.ToolTip>
             </TabItem>
             <TabItem Header="Problem Alokacji Zadań">
                 <views:TaskAllocationView />
+
+                <TabItem.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Problem alokacji zadań polega na przypisaniu zadań do zasobów (np. pracowników) <LineBreak/>
+                            w taki sposób, aby minimalizować koszty lub maksymalizować efektywność.<LineBreak/>
+                            Wprowadź dane dotyczące zadań i dostępnych zasobów, aby uzyskać optymalne rozwiązanie.
+                        </TextBlock>
+                    </ToolTip>
+                </TabItem.ToolTip>
             </TabItem>
             <TabItem Header="Problem Komiwojażera">
                 <views:TSPView />
+
+                <TabItem.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Problem komiwojażera polega na znalezieniu najkrótszej możliwej trasy, <LineBreak/>
+                            która pozwala odwiedzić wszystkie zadane miasta i wrócić do punktu startowego.<LineBreak/>
+                            Wprowadź listę miast i odległości między nimi, aby obliczyć optymalną trasę.
+                        </TextBlock>
+                    </ToolTip>
+                </TabItem.ToolTip>
             </TabItem>
         </TabControl>
     </Grid>
