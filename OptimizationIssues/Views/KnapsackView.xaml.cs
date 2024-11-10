@@ -37,7 +37,7 @@ namespace OptimizationIssues.Views
             };
 
             plotModel.TextColor = OxyColor.FromRgb(255, 255, 255);
-            KnapsackPlotView.Model = plotModel;
+            PlotView.Model = plotModel;
         }
 
         private void SolveButton_Click(object sender, RoutedEventArgs e)
@@ -341,7 +341,7 @@ namespace OptimizationIssues.Views
                 TextColor = OxyColor.FromRgb(255, 255, 255)
             });
 
-            KnapsackPlotView.Model = plotModel;
+            PlotView.Model = plotModel;
         }
     }
 }
