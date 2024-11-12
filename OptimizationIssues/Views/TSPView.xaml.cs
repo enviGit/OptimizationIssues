@@ -32,10 +32,17 @@ namespace OptimizationIssues.Views
                     viewModel.NumberOfCities = int.Parse(NumberOfCitiesTextBox.Text);
                     viewModel.DistanceMatrix = ParseDistanceMatrix(DistanceMatrixTextBox.Text);
 
+                    var watch = Stopwatch.StartNew();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+
                     (int result, List<int> path) = viewModel.SolveTravelingSalesmanProblem();
                     path.Add(path[0]);
                     string pathString = string.Join(" -> ", path);
                     ResultTextBlock.Inlines.Clear();
+
+                    watch.Stop();
 
                     ResultTextBlock.Inlines.Add(new Run("Minimalna długość trasy: ")
                     {
@@ -67,6 +74,18 @@ namespace OptimizationIssues.Views
                             Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
                         });
                     }
+
+                    ResultTextBlock.Inlines.Add(new Run($"\nCzas obliczeń: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    string colorHex = watch.ElapsedMilliseconds < 500 ? "#98FF98" : watch.ElapsedMilliseconds < 3000 ? "#FFFF66" : "#FF9898";
+
+                    ResultTextBlock.Inlines.Add(new Run($"{watch.ElapsedMilliseconds} ms")
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorHex))
+                    });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";

@@ -32,8 +32,15 @@ namespace OptimizationIssues.Views
                     viewModel.NumberOfTasks = numberOfTasks;
                     viewModel.CostMatrix = costMatrix;
 
+                    var watch = Stopwatch.StartNew();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+
                     var (minCost, maxValue) = viewModel.SolveTaskAllocation();
                     ResultTextBlock.Inlines.Clear();
+
+                    watch.Stop();
 
                     ResultTextBlock.Inlines.Add(new Run("Minimalny koszt: ")
                     {
@@ -53,6 +60,18 @@ namespace OptimizationIssues.Views
                     ResultTextBlock.Inlines.Add(new Run(maxValue.ToString())
                     {
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9898"))
+                    });
+
+                    ResultTextBlock.Inlines.Add(new Run($"\nCzas obliczeń: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    string colorHex = watch.ElapsedMilliseconds < 100 ? "#98FF98" : watch.ElapsedMilliseconds < 500 ? "#FFFF66" : "#FF9898";
+
+                    ResultTextBlock.Inlines.Add(new Run($"{watch.ElapsedMilliseconds} ms")
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorHex))
                     });
                 }
                 else

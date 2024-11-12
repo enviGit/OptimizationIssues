@@ -52,8 +52,15 @@ namespace OptimizationIssues.Views
                     viewModel.Weights = weights;
                     viewModel.Values = values;
 
+                    var watch = Stopwatch.StartNew();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    GC.Collect();
+
                     var (maxValue, selectedItems, usedCapacity) = viewModel.SolveKnapsackWithDetails();
                     ResultTextBlock.Inlines.Clear();
+
+                    watch.Stop();
 
                     ResultTextBlock.Inlines.Add(new Run("Maksymalna wartość: ")
                     {
@@ -79,6 +86,18 @@ namespace OptimizationIssues.Views
                         : (Color)ColorConverter.ConvertFromString("#FF9898"))
                     });
 
+                    ResultTextBlock.Inlines.Add(new Run($"\nCzas obliczeń: ")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White)
+                    });
+
+                    string colorHex = watch.ElapsedMilliseconds < 20 ? "#98FF98" : watch.ElapsedMilliseconds < 50 ? "#FFFF66" : "#FF9898";
+
+                    ResultTextBlock.Inlines.Add(new Run($"{watch.ElapsedMilliseconds} ms")
+                    {
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorHex))
+                    });
+
                     ResultTextBlock.Inlines.Add(new Run("\n\nWybrane przedmioty:\n")
                     {
                         Foreground = new SolidColorBrush(Colors.White),
@@ -87,8 +106,8 @@ namespace OptimizationIssues.Views
 
                     selectedItems.Reverse();
 
-                    foreach(var item in selectedItems)
-{
+                    foreach (var item in selectedItems)
+                    {
                         int itemNumber = item.Index + 1;
 
                         ResultTextBlock.Inlines.Add(new Run($"Przedmiot ")
@@ -253,8 +272,8 @@ namespace OptimizationIssues.Views
 
         private void UpdateChart(List<KnapsackItem> selectedItems)
         {
-            var plotModel = new PlotModel 
-            { 
+            var plotModel = new PlotModel
+            {
                 Title = "Wyniki optymalizacji",
                 Background = OxyColor.FromRgb(46, 46, 46)
             };
