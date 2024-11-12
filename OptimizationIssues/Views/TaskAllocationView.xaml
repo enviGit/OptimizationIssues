@@ -126,7 +126,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
-                    Należy podać liczbę całkowitą (np. 3).
+                    Należy podać liczbę całkowitą (np. 4).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -136,7 +136,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
-                    Należy podać liczbę całkowitą (np. 3).
+                    Należy podać liczbę całkowitą (np. 100).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
@@ -146,8 +146,8 @@
                 <TextBlock.ToolTip>
                     <ToolTip>
                         <TextBlock>
-                    Wprowadź kolejno koszty zadań,<LineBreak/>
-                    oddzielając je przecinkami (np. 10, 20, 30, 40).<LineBreak/>
+                            Wprowadź koszty przydziału zadań do zasobów.<LineBreak/>
+                            Oddziel koszty przecinkami w jednym wierszu (np. 10, 20, 30, 40).<LineBreak/>
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -156,12 +156,8 @@
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
-                    Wprowadź macierz kosztów przydziału zadań do zasobów.<LineBreak/>
-                    Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
-                    Przykład: <LineBreak/>
-                    10,20,30 <LineBreak/>
-                    20,15,25 <LineBreak/>
-3                   0,25,10
+                    Wprowadź koszty przydziału zadań do zasobów.<LineBreak/>
+                    Oddziel koszty przecinkami w jednym wierszu (np. 10, 20, 30, 40).<LineBreak/>
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
