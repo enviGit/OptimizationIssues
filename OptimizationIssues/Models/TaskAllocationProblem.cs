@@ -4,13 +4,13 @@
     {
         public int NumberOfResources { get; set; }
         public int NumberOfTasks { get; set; }
-        public int[,] CostMatrix { get; set; }
+        public int[,] TaskCosts { get; set; }
 
-        public TaskAllocationProblem(int numberOfResources, int numberOfTasks, int[,] costMatrix)
+        public TaskAllocationProblem(int numberOfResources, int numberOfTasks, int[,] taskCosts)
         {
             NumberOfResources = numberOfResources;
             NumberOfTasks = numberOfTasks;
-            CostMatrix = costMatrix;
+            TaskCosts = taskCosts;
         }
 
         public override int Solve()
