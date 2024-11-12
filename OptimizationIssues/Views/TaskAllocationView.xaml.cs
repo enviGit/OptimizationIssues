@@ -26,53 +26,56 @@ namespace OptimizationIssues.Views
             {
                 var viewModel = (TaskAllocationViewModel)DataContext;
 
-                if (ValidateInputs(out var numberOfResources, out var numberOfTasks, out var costMatrix))
+                if (ValidateInputs(out var numberOfResources, out var numberOfTasks, out var taskCosts))
                 {
                     viewModel.NumberOfResources = numberOfResources;
                     viewModel.NumberOfTasks = numberOfTasks;
-                    viewModel.CostMatrix = costMatrix;
+                    viewModel.TaskCosts = taskCosts;
 
-                    var watch = Stopwatch.StartNew();
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                    GC.Collect();
-
-                    var (minCost, maxValue) = viewModel.SolveTaskAllocation();
+                    var (taskAssignments, processorCompletionTimes, processorLoadHistogram) = viewModel.SolveTaskAllocation();
                     ResultTextBlock.Inlines.Clear();
 
-                    watch.Stop();
-
-                    ResultTextBlock.Inlines.Add(new Run("Minimalny koszt: ")
+                    ResultTextBlock.Inlines.Add(new Run("Lista przydziałów:\n")
                     {
-                        Foreground = new SolidColorBrush(Colors.White)
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontWeight = FontWeights.Bold
                     });
 
-                    ResultTextBlock.Inlines.Add(new Run(minCost.ToString())
+                    foreach (var assignment in taskAssignments)
                     {
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#98FF98"))
+                        ResultTextBlock.Inlines.Add(new Run(assignment + "\n")
+                        {
+                            Foreground = new SolidColorBrush(Colors.LightGreen)
+                        });
+                    }
+
+                    ResultTextBlock.Inlines.Add(new Run("\nCzasy zakończenia procesorów:\n")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontWeight = FontWeights.Bold
                     });
 
-                    ResultTextBlock.Inlines.Add(new Run("\nMaksymalna wartość: ")
+                    foreach (var time in processorCompletionTimes)
                     {
-                        Foreground = new SolidColorBrush(Colors.White)
+                        ResultTextBlock.Inlines.Add(new Run(time + "\n")
+                        {
+                            Foreground = new SolidColorBrush(Colors.LightSkyBlue)
+                        });
+                    }
+
+                    ResultTextBlock.Inlines.Add(new Run("\nHistogram obciążenia procesorów:\n")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontWeight = FontWeights.Bold
                     });
 
-                    ResultTextBlock.Inlines.Add(new Run(maxValue.ToString())
+                    for (int i = 0; i < processorLoadHistogram.Count; i++)
                     {
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF9898"))
-                    });
-
-                    ResultTextBlock.Inlines.Add(new Run($"\nCzas obliczeń: ")
-                    {
-                        Foreground = new SolidColorBrush(Colors.White)
-                    });
-
-                    string colorHex = watch.ElapsedMilliseconds < 100 ? "#98FF98" : watch.ElapsedMilliseconds < 500 ? "#FFFF66" : "#FF9898";
-
-                    ResultTextBlock.Inlines.Add(new Run($"{watch.ElapsedMilliseconds} ms")
-                    {
-                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorHex))
-                    });
+                        ResultTextBlock.Inlines.Add(new Run($"P{i}: {processorLoadHistogram[i]}%\n")
+                        {
+                            Foreground = new SolidColorBrush(Colors.Yellow)
+                        });
+                    }
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
@@ -84,26 +87,37 @@ namespace OptimizationIssues.Views
             }
         }
 
-        private List<List<int>> ParseCostMatrix(string input)
+        private List<int> ParseTaskCosts(string input)
         {
-            var rows = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-            var costMatrix = new List<List<int>>();
+            var values = input.Split(',').Select(str => int.TryParse(str.Trim(), out var cost) ? cost : (int?)null)
+                                .Where(num => num.HasValue)
+                                .Select(num => num.Value)
+                                .ToList();
 
-            foreach (var row in rows)
-            {
-                var values = row.Split(',').Select(int.Parse).ToList();
-                costMatrix.Add(values);
-            }
-
-            return costMatrix;
+            return values;
         }
-        private bool ValidateInputs(out int numberOfResources, out int numberOfTasks, out List<List<int>> costMatrix)
+        private bool TryParseTaskCosts(string input, out List<int> taskCosts)
+        {
+            taskCosts = new List<int>();
+
+            try
+            {
+                taskCosts = ParseTaskCosts(input);
+                return taskCosts.Count > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool ValidateInputs(out int numberOfResources, out int numberOfTasks, out List<int> taskCosts)
         {
             bool isValid = true;
 
             numberOfResources = 0;
             numberOfTasks = 0;
-            costMatrix = new List<List<int>>();
+            taskCosts = new List<int>();
 
             if (string.IsNullOrWhiteSpace(NumberOfResourcesTextBox.Text) || !int.TryParse(NumberOfResourcesTextBox.Text, out numberOfResources) || numberOfResources <= 0)
             {
@@ -129,46 +143,19 @@ namespace OptimizationIssues.Views
                 NumberOfTasksTextBox.BorderThickness = new Thickness(1);
             }
 
-            if (string.IsNullOrWhiteSpace(CostMatrixTextBox.Text) || !TryParseCostMatrix(CostMatrixTextBox.Text, out costMatrix))
+            if (string.IsNullOrWhiteSpace(TaskCostsTextBox.Text) || !TryParseTaskCosts(TaskCostsTextBox.Text, out taskCosts))
             {
                 isValid = false;
-                CostMatrixTextBox.BorderBrush = Brushes.Red;
-                CostMatrixTextBox.BorderThickness = new Thickness(2);
+                TaskCostsTextBox.BorderBrush = Brushes.Red;
+                TaskCostsTextBox.BorderThickness = new Thickness(2);
             }
             else
             {
-                CostMatrixTextBox.BorderBrush = Brushes.Black;
-                CostMatrixTextBox.BorderThickness = new Thickness(1);
+                TaskCostsTextBox.BorderBrush = Brushes.Black;
+                TaskCostsTextBox.BorderThickness = new Thickness(1);
             }
 
             return isValid;
-        }
-        private bool TryParseCostMatrix(string input, out List<List<int>> costMatrix)
-        {
-            costMatrix = new List<List<int>>();
-            var rows = input.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-
-            try
-            {
-                foreach (var row in rows)
-                {
-                    var values = row.Split(',').Select(str => int.TryParse(str.Trim(), out var number) ? number : (int?)null)
-                                    .Where(num => num.HasValue)
-                                    .Select(num => num.Value)
-                                    .ToList();
-
-                    if (values.Count == 0)
-                        return false;
-
-                    costMatrix.Add(values);
-                }
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private void InputsChanged(object sender, TextChangedEventArgs e)
@@ -179,26 +166,18 @@ namespace OptimizationIssues.Views
         {
             Random random = new Random();
 
-            int numberOfResources = random.Next(2, 6);
-            int numberOfTasks = random.Next(2, 6);
+            int numberOfResources = random.Next(2, 5);
+            int numberOfTasks = random.Next(1, 101);
 
-            var costMatrix = new List<List<int>>();
+            var taskCosts = new List<int>();
 
-            for (int i = 0; i < numberOfResources; i++)
-            {
-                var row = new List<int>();
-
-                for (int j = 0; j < numberOfTasks; j++)
-                    row.Add(random.Next(10, 100));
-
-                costMatrix.Add(row);
-            }
+            for (int i = 0; i < numberOfTasks; i++)
+                taskCosts.Add(random.Next(10, 91));
 
             NumberOfResourcesTextBox.Text = numberOfResources.ToString();
             NumberOfTasksTextBox.Text = numberOfTasks.ToString();
 
-            var costMatrixText = string.Join(Environment.NewLine, costMatrix.Select(row => string.Join(",", row)));
-            CostMatrixTextBox.Text = costMatrixText;
+            TaskCostsTextBox.Text = string.Join(",", taskCosts);
 
             SolveButton.IsEnabled = true;
         }

@@ -4,64 +4,58 @@
     {
         public int NumberOfResources { get; set; }
         public int NumberOfTasks { get; set; }
-        public List<List<int>> CostMatrix { get; set; }
+        public List<int> TaskCosts { get; set; }
 
         public TaskAllocationViewModel()
         {
-            CostMatrix = new List<List<int>>();
+            TaskCosts = new List<int>();
         }
 
-        public (int MinCost, int MaxValue) SolveTaskAllocation()
+        public (List<string> TaskAssignments, List<string> ProcessorCompletionTimes, List<int> ProcessorLoadHistogram) SolveTaskAllocation()
         {
-            int[,] costMatrix = new int[NumberOfResources, NumberOfTasks];
+            double[] processorMultipliers = new double[] { 1.0, 1.25, 1.5, 1.75 };
+
+            List<string> taskAssignments = new List<string>();
+            List<string> processorCompletionTimes = new List<string>();
+            List<int> processorLoadHistogram = new List<int>();
+
+            int[] processorCompletionTime = new int[NumberOfResources];
 
             for (int i = 0; i < NumberOfResources; i++)
+                processorCompletionTime[i] = 0;
+
+            for (int task = 0; task < NumberOfTasks; task++)
             {
-                for (int j = 0; j < NumberOfTasks; j++)
+                int minTimeProcessor = -1;
+                int minCompletionTime = int.MaxValue;
+
+                for (int resource = 0; resource < NumberOfResources; resource++)
                 {
-                    costMatrix[i, j] = CostMatrix[i][j];
+                    int taskTime = (int)(TaskCosts[task] * processorMultipliers[resource]);
+
+                    if (processorCompletionTime[resource] + taskTime < minCompletionTime)
+                    {
+                        minCompletionTime = processorCompletionTime[resource] + taskTime;
+                        minTimeProcessor = resource;
+                    }
                 }
+
+                taskAssignments.Add($"Zadanie {task + 1}: Procesor P{minTimeProcessor}, Czas: {TaskCosts[task] * processorMultipliers[minTimeProcessor]} ms");
+                processorCompletionTime[minTimeProcessor] += (int)(TaskCosts[task] * processorMultipliers[minTimeProcessor]);
             }
 
-            int minCost = CalculateMinCost(costMatrix, NumberOfResources, NumberOfTasks);
+            for (int i = 0; i < NumberOfResources; i++)
+                processorCompletionTimes.Add($"P{i}: zakończenie pracy w {processorCompletionTime[i]} ms");
 
-            int maxValue = CalculateMaxValue(costMatrix, NumberOfResources, NumberOfTasks);
+            int maxCompletionTime = processorCompletionTime.Max();
 
-            return (minCost, maxValue);
-        }
-
-        private int CalculateMinCost(int[,] costMatrix, int resources, int tasks)
-        {
-            int[,] dp = new int[resources + 1, tasks + 1];
-
-            for (int i = 0; i <= resources; i++)
+            foreach (var completionTime in processorCompletionTime)
             {
-                for (int j = 0; j <= tasks; j++)
-                {
-                    if (i == 0 || j == 0)
-                        dp[i, j] = 0;
-                    else
-                        dp[i, j] = Math.Min(dp[i - 1, j], dp[i, j - 1]) + costMatrix[i - 1, j - 1];
-                }
+                int loadPercentage = (int)((double)completionTime / maxCompletionTime * 100);
+                processorLoadHistogram.Add(loadPercentage);
             }
-            return dp[resources, tasks];
-        }
 
-        private int CalculateMaxValue(int[,] costMatrix, int resources, int tasks)
-        {
-            int[,] dp = new int[resources + 1, tasks + 1];
-
-            for (int i = 0; i <= resources; i++)
-            {
-                for (int j = 0; j <= tasks; j++)
-                {
-                    if (i == 0 || j == 0)
-                        dp[i, j] = 0;
-                    else
-                        dp[i, j] = Math.Max(dp[i - 1, j], dp[i, j - 1]) + costMatrix[i - 1, j - 1];
-                }
-            }
-            return dp[resources, tasks];
+            return (taskAssignments, processorCompletionTimes, processorLoadHistogram);
         }
     }
 }

@@ -142,21 +142,17 @@
                 </TextBox.ToolTip>
             </TextBox>
 
-            <TextBlock Text="Macierz kosztów:" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <TextBlock Text="Koszty zadań:" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <TextBlock.ToolTip>
                     <ToolTip>
                         <TextBlock>
-                    Wprowadź macierz kosztów przydziału zadań do zasobów.<LineBreak/>
-                    Oddziel koszty przecinkami w jednym wierszu, a wiersze macierzy nowymi liniami.<LineBreak/>
-                    Przykład: <LineBreak/>
-                    10,20,30 <LineBreak/>
-                    20,15,25 <LineBreak/>
-                    30,25,10
+                    Wprowadź kolejno koszty zadań,<LineBreak/>
+                    oddzielając je przecinkami (np. 10, 20, 30, 40).<LineBreak/>
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
     </TextBlock>
-            <TextBox x:Name="CostMatrixTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" AcceptsReturn="True" Height="100" TextChanged="InputsChanged">
+            <TextBox x:Name="TaskCostsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
@@ -196,7 +192,9 @@
                 </Button>
             </StackPanel>
             <TextBlock Text="Wyniki:" FontWeight="Bold" FontSize="16" VerticalAlignment="Top"/>
-            <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14" Margin="0,5,0,0"/>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" MaxHeight="250">
+                <TextBlock x:Name="ResultTextBlock" Text="Tutaj pojawią się wyniki..." VerticalAlignment="Top" FontSize="14" Margin="0,5,0,0"/>
+            </ScrollViewer>
         </StackPanel>
     </Grid>
 </UserControl>
