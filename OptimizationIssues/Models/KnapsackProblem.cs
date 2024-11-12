@@ -15,7 +15,7 @@
             Indexes = Enumerable.Range(0, weights.Count).ToList();
         }
 
-        public override int Solve()
+        public override int Solve(int a = 0, int b = 0, int c = 0)
         {
             return 0;
         }

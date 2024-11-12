@@ -9,7 +9,6 @@ using OxyPlot;
 using OxyPlot.Series;
 using OxyPlot.Axes;
 using OxyPlot.Annotations;
-using static OptimizationIssues.Views.KnapsackView;
 
 namespace OptimizationIssues.Views
 {
@@ -242,17 +241,17 @@ namespace OptimizationIssues.Views
         {
             Random random = new Random();
 
-            int capacity = random.Next(10, 101);
+            int capacity = random.Next(50, 2501);
             CapacityTextBox.Text = capacity.ToString();
 
-            int itemCount = random.Next(3, 8);
+            int itemCount = random.Next(1, 101);
             List<int> weights = new List<int>();
             List<int> values = new List<int>();
 
             for (int i = 0; i < itemCount; i++)
             {
                 weights.Add(random.Next(1, capacity / 2));
-                values.Add(random.Next(10, 101));
+                values.Add(random.Next(10, 91));
             }
 
             WeightsTextBox.Text = string.Join(", ", weights);
@@ -274,7 +273,7 @@ namespace OptimizationIssues.Views
         {
             var plotModel = new PlotModel
             {
-                Title = "Wyniki optymalizacji",
+                Title = "Wykres",
                 Background = OxyColor.FromRgb(46, 46, 46)
             };
 

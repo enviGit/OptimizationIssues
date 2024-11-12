@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OptimizationIssues"
 		xmlns:views="clr-namespace:OptimizationIssues.Views"
         mc:Ignorable="d"
-        Title="Problemy Optymalizacyjne" Height="450" Width="1000"
+        Title="Problemy Optymalizacyjne" Height="550" Width="1000"
         Icon="/Icon.png" ResizeMode="NoResize">
 
     <Window.Resources>

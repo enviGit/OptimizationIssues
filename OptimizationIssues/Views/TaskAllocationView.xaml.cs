@@ -31,8 +31,11 @@ namespace OptimizationIssues.Views
                     viewModel.NumberOfResources = numberOfResources;
                     viewModel.NumberOfTasks = numberOfTasks;
                     viewModel.TaskCosts = taskCosts;
+                    viewModel.MaxTrials = int.Parse(NumberOfTrialsTextBox.Text);
+                    viewModel.MaxGenerationsWithoutImprovement = int.Parse(MaxGenerationsWithoutImprovementTextBox.Text);
+                    viewModel.MaxTime = int.Parse(MaxTimeTextBox.Text);
 
-                    var (taskAssignments, processorCompletionTimes, processorLoadHistogram) = viewModel.SolveTaskAllocation();
+                    var (taskAssignments, processorCompletionTimes, processorLoadHistogram, lastProcessorCompletionTime) = viewModel.SolveTaskAllocation();
                     ResultTextBlock.Inlines.Clear();
 
                     ResultTextBlock.Inlines.Add(new Run("Lista przydziałów:\n")
@@ -45,7 +48,21 @@ namespace OptimizationIssues.Views
                     {
                         ResultTextBlock.Inlines.Add(new Run(assignment + "\n")
                         {
-                            Foreground = new SolidColorBrush(Colors.LightGreen)
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD700"))
+                        });
+                    }
+
+                    ResultTextBlock.Inlines.Add(new Run("\nHistogram obciążenia procesorów:\n")
+                    {
+                        Foreground = new SolidColorBrush(Colors.White),
+                        FontWeight = FontWeights.Bold
+                    });
+
+                    for (int i = 0; i < processorLoadHistogram.Count; i++)
+                    {
+                        ResultTextBlock.Inlines.Add(new Run($"P{i} - {processorLoadHistogram[i]}%\n")
+                        {
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E6A8D7"))
                         });
                     }
 
@@ -59,23 +76,23 @@ namespace OptimizationIssues.Views
                     {
                         ResultTextBlock.Inlines.Add(new Run(time + "\n")
                         {
-                            Foreground = new SolidColorBrush(Colors.LightSkyBlue)
+                            Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ADD8E6"))
                         });
                     }
 
-                    ResultTextBlock.Inlines.Add(new Run("\nHistogram obciążenia procesorów:\n")
+                    ResultTextBlock.Inlines.Add(new Run($"\nCzas zakończenia pracy przez ostatni procesor: ")
                     {
                         Foreground = new SolidColorBrush(Colors.White),
                         FontWeight = FontWeights.Bold
                     });
 
-                    for (int i = 0; i < processorLoadHistogram.Count; i++)
+                    string colorHex = lastProcessorCompletionTime < 500 ? "#98FF98" : lastProcessorCompletionTime < 3000 ? "#FFFF66" : "#FF9898";
+
+                    ResultTextBlock.Inlines.Add(new Run($"{lastProcessorCompletionTime} ms\n")
                     {
-                        ResultTextBlock.Inlines.Add(new Run($"P{i}: {processorLoadHistogram[i]}%\n")
-                        {
-                            Foreground = new SolidColorBrush(Colors.Yellow)
-                        });
-                    }
+                        Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(colorHex)),
+                        FontWeight = FontWeights.Bold
+                    });
                 }
                 else
                     ResultTextBlock.Text = "Podano błędne dane. Upewnij się, że wszystkie pola są poprawnie wypełnione.";
@@ -178,6 +195,14 @@ namespace OptimizationIssues.Views
             NumberOfTasksTextBox.Text = numberOfTasks.ToString();
 
             TaskCostsTextBox.Text = string.Join(",", taskCosts);
+
+            int numberOfTrials = numberOfTasks * 1000;
+            int maxGenerationsWithoutImprovement = numberOfTasks * 10;
+            int maxTime = numberOfTasks * 600;
+
+            NumberOfTrialsTextBox.Text = numberOfTrials.ToString();
+            MaxGenerationsWithoutImprovementTextBox.Text = maxGenerationsWithoutImprovement.ToString();
+            MaxTimeTextBox.Text = maxTime.ToString();
 
             SolveButton.IsEnabled = true;
         }

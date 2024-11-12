@@ -105,7 +105,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę dostępnych zasobów.<LineBreak/>
-                    Należy podać liczbę całkowitą (np. 3).
+                    Należy podać liczbę całkowitą (np. 4).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -115,7 +115,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę dostępnych zasobów.<LineBreak/>
-                    Należy podać liczbę całkowitą (np. 3).
+                    Należy podać liczbę całkowitą (np. 4).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
@@ -126,7 +126,7 @@
                     <ToolTip>
                         <TextBlock>
                     Wprowadź liczbę zadań do przydzielenia.<LineBreak/>
-                    Należy podać liczbę całkowitą (np. 4).
+                    Należy podać liczbę całkowitą (np. 100).
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
@@ -151,13 +151,70 @@
                         </TextBlock>
                     </ToolTip>
                 </TextBlock.ToolTip>
-    </TextBlock>
+            </TextBlock>
             <TextBox x:Name="TaskCostsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" TextChanged="InputsChanged">
                 <TextBox.ToolTip>
                     <ToolTip>
                         <TextBlock>
                     Wprowadź koszty przydziału zadań do zasobów.<LineBreak/>
                     Oddziel koszty przecinkami w jednym wierszu (np. 10, 20, 30, 40).<LineBreak/>
+                        </TextBlock>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <TextBlock Text="Liczba prób:" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalną liczbę prób dla algorytmu (np. 100000).
+                        </TextBlock>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+            <TextBox x:Name="NumberOfTrialsTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalną liczbę prób dla algorytmu (np. 100000).
+                        </TextBlock>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <TextBlock Text="Liczba nieudanych wymian pokoleń:" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalną liczbę nieudanych wymian pokoleń dla algorytmu (np. 1000).
+                        </TextBlock>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+            <TextBox x:Name="MaxGenerationsWithoutImprovementTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalną liczbę nieudanych wymian pokoleń dla algorytmu (np. 1000).
+                        </TextBlock>
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
+
+            <TextBlock Text="Czas pracy (ms):" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <TextBlock.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalny czas pracy dla algorytmu wyrażony w milisekundach (np. 60000).
+                        </TextBlock>
+                    </ToolTip>
+                </TextBlock.ToolTip>
+            </TextBlock>
+            <TextBox x:Name="MaxTimeTextBox" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        <TextBlock>
+                            Wprowadź maksymalny czas pracy dla algorytmu wyrażony w milisekundach (np. 60000).
                         </TextBlock>
                     </ToolTip>
                 </TextBox.ToolTip>
